@@ -13,12 +13,12 @@ const choices: IChoice[] = [
   {
     label: "Shower",
     emoji: "🚿",
-    probability: 0.5,
+    probability: 0.7,
   },
   {
     label: "Bath",
     emoji: "🛁",
-    probability: 0.5,
+    probability: 0.3,
   },
   {
     label: "Wash in the toilet",
