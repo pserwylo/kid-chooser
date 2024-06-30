@@ -51,17 +51,22 @@ const choicesSlice = createSlice({
             {
               label: "Cereal",
               emoji: "🥣",
-              probability: 0.7,
+              probability: 0.5,
             },
             {
               label: "Fruit",
               emoji: "🍏🍒🍐🍌🍓🍊🥝🍉",
-              probability: 0.3,
+              probability: 0.5,
+            },
+            {
+              label: "Yoghurt",
+              emoji: "🥣",
+              probability: 4,
             },
             {
               label: "Poo Smoothies",
               emoji: "🧋💩",
-              probability: 1,
+              probability: 10,
               isJoke: true,
             }
           ]
