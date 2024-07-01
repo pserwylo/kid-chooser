@@ -34,12 +34,12 @@ const choicesSlice = createSlice({
               emoji: "🛁",
               probability: 0.3,
             },
-            {
+            /*{
               label: "Wash in the toilet",
               emoji: "🚽💩",
               probability: 1,
               isJoke: true,
-            }
+            }*/
           ]
       },
       {
@@ -63,12 +63,12 @@ const choicesSlice = createSlice({
               emoji: "🥣",
               probability: 4,
             },
-            {
+            /*{
               label: "Poo Smoothies",
               emoji: "🧋💩",
               probability: 10,
               isJoke: true,
-            }
+            }*/
           ]
       }
     ] as IChooser[],
