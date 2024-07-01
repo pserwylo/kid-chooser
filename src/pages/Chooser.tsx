@@ -1,7 +1,14 @@
+import "./chooser.css";
 import {Container} from "react-bootstrap";
-import {IChoice, selectChoosers} from "../app/choicesSlice.tsx";
+import {
+  IChoice,
+  recordChoice, selectChooserBySlug,
+  selectChosenChoicesForSlug
+} from "../app/choicesSlice.tsx";
 import {NavLink, useNavigate, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
+import clsx from "clsx";
 
 const randomChoice = (choices: IChoice[], excludeJokes = false): IChoice => {
   const list = excludeJokes ? choices.filter(c => !c.isJoke) : choices;
@@ -9,37 +16,61 @@ const randomChoice = (choices: IChoice[], excludeJokes = false): IChoice => {
   const selectProb = Math.random() * totalProb;
   let sum = 0;
   for (let i = 0; i < choices.length; i++) {
-    sum += choices[i].probability;
+    sum += list[i].probability;
     if (selectProb < sum) {
-      return choices[i];
+      return list[i];
     }
   }
 
-  return choices[choices.length - 1];
+  return list[choices.length - 1];
 };
 
 const Chooser = () => {
 
-  const {chooserSlug} = useParams<{ chooserSlug: string }>();
-
-  const chooser = useSelector(selectChoosers).find(c => c.slug === chooserSlug);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const {chooserSlug} = useParams<{ chooserSlug: string }>();
+  const chooser = useAppSelector(state => selectChooserBySlug(state, chooserSlug));
+  const { choice, backupChoice } = useAppSelector(state => selectChosenChoicesForSlug(state, chooserSlug));
+  const [ hasAlreadyChosen ] = useState(choice != null);
+
+  useEffect(() => {
+    if (choice != null) {
+      return;
+    }
+
+    if (chooser == null) {
+      return;
+    }
+
+    const newChoice = randomChoice(chooser.choices);
+    const newBackupChoice = newChoice.isJoke ? randomChoice(chooser.choices, true) : null;
+
+    dispatch(recordChoice({
+      chooserSlug: chooser.slug,
+      choiceSlug: newChoice.slug,
+      backupChoiceSlug: newBackupChoice?.slug
+    }));
+
+  }, [chooser, choice, dispatch]);
 
   if (!chooser) {
     navigate("/");
     return;
   }
 
-  const choice = randomChoice(chooser.choices);
-  const backupChoice = choice.isJoke ? randomChoice(chooser.choices, true) : null;
+  if (choice == null) {
+    return null;
+  }
 
   return (
-    <Container>
+    <Container className={clsx('chooser-root', { 'fade-in': !hasAlreadyChosen })}>
+      {hasAlreadyChosen && <p>You've already chosen:</p>}
       <h1>{choice.label} {choice.emoji}</h1>
+
       {backupChoice != null && <p>Just kidding, it's {backupChoice.label} {backupChoice.emoji}!</p>}
 
       <NavLink to="/">Back</NavLink>
-
     </Container>
   )
 }
