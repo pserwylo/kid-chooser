@@ -16,9 +16,17 @@ body {
 .choice-chosen {
     font-size: 1.5rem;
     display: block;
+    padding: 2rem;
+    text-align: center;
 }
 
 .choice-backup {
     font-size: 0.8rem;
     display: block;
+    text-align: center;
+}
+
+.choice-already-chosen {
+    font-size: 0.7rem;
+    color: darkgray;
 }

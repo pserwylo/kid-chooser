@@ -44,7 +44,7 @@ const ChooserCard = ({ chooser }: IChooserCardProps) => {
             <Button>Help me choose!</Button>
           </LinkContainer>
         ) : (
-          <>Already chosen. Try again tomorrow.</>
+          <div className="choice-already-chosen">Already chosen. Choose again tomorrow.</div>
         )}
       </CardFooter>
     </Card>
