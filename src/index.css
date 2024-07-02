@@ -2,6 +2,10 @@ body {
     margin-top: 1em;
 }
 
+.splash-card {
+    margin-top: 2rem;
+}
+
 .choice {
     font-size: 1.3rem;
     display: inline-block;

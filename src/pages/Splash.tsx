@@ -8,8 +8,8 @@ const Splash = () => {
   const choosers = useAppSelector(selectChoosers);
 
   return (<Container>
-    <Row>
-      {choosers.map(chooser => (<Col md={4} key={chooser.slug}>
+    <Row className="splash-cards">
+      {choosers.map(chooser => (<Col md={6} lg={4} key={chooser.slug}>
         <ChooserCard chooser={chooser} />
         </Col>))}
     </Row>
@@ -25,7 +25,7 @@ const ChooserCard = ({ chooser }: IChooserCardProps) => {
   const { choice, backupChoice } = useAppSelector(state => selectChosenChoicesForSlug(state, chooser.slug));
 
   return (
-    <Card key={chooser.slug}>
+    <Card className="splash-card">
       <CardBody>
         {choice != null ? (
           <>
