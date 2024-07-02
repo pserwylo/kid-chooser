@@ -30,13 +30,13 @@ const choicesSlice = createSlice({
               slug: "shower",
               label: "Shower",
               emoji: "🚿",
-              probability: 0.7,
+              probability: 1,
             },
             {
               slug: "bath",
               label: "Bath",
               emoji: "🛁",
-              probability: 0.3,
+              probability: 1,
             },
           ]
       },
@@ -50,19 +50,19 @@ const choicesSlice = createSlice({
               slug: "cereal",
               label: "Cereal",
               emoji: "🥣",
-              probability: 0.5,
+              probability: 1,
             },
             {
               slug: "fruit",
               label: "Fruit",
               emoji: "🍏🍒🍐🍌🍓🍊🥝🍉",
-              probability: 0.5,
+              probability: 1,
             },
             {
               slug: "yoghurt",
               label: "Yoghurt",
               emoji: "🥣",
-              probability: 4,
+              probability: 1,
             },
           ]
       }
