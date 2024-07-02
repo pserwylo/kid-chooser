@@ -41,7 +41,7 @@ const ChooserCard = ({ chooser }: IChooserCardProps) => {
       <CardFooter>
         {choice == null ? (
           <LinkContainer to={`/choose/${chooser.slug}`}>
-            <Button>Help me chose!</Button>
+            <Button>Help me choose!</Button>
           </LinkContainer>
         ) : (
           <>Already chosen. Try again tomorrow.</>
