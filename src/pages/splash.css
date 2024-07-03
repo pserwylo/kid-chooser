@@ -1,0 +1,28 @@
+.splash-card {
+    margin-top: 2rem;
+}
+
+.splash-card .choice {
+    font-size: 1.3rem;
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.splash-card .choice-chosen {
+    font-size: 1.5rem;
+    display: block;
+    padding: 2rem;
+    text-align: center;
+}
+
+.splash-card .choice-backup {
+    font-size: 0.8rem;
+    display: block;
+    text-align: center;
+}
+
+.splash-card .choice-already-chosen {
+    font-size: 0.7rem;
+    color: darkgray;
+}

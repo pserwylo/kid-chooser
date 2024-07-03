@@ -2,6 +2,7 @@ import {Button, Card, CardBody, CardFooter, Col, Container, Row} from "react-boo
 import {LinkContainer} from 'react-router-bootstrap';
 import {IChooser, selectChoosers, selectChosenChoicesForSlug} from "../app/choicesSlice.tsx";
 import {useAppSelector} from "../app/hooks.ts";
+import './splash.css'
 
 const Splash = () => {
 
