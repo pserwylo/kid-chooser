@@ -1,0 +1,15 @@
+.chooser-animation {
+
+}
+
+.chooser-animation-flicker {
+    margin: 2rem;
+}
+
+.chooser-animation-choice {
+    font-size: 1.5rem;
+}
+
+.chooser-animation-choice--selected {
+    font-size: 3rem;
+}

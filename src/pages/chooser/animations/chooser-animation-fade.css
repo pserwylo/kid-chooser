@@ -1,0 +1,21 @@
+.chooser-animation-fade {
+    margin: 2rem;
+}
+
+.chooser-animation-choice {
+    font-size: 1.5rem;
+}
+
+.chooser-animation-choice--selected {
+    font-size: 3rem;
+}
+
+.chooser-animation-fade .chooser-animation-fade--wrapper {
+    animation: fadeIn 3.5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    20% { opacity: 0; }
+    100% { opacity: 1; }
+}
