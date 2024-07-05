@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 
 type IProps = {
   choices: IChoice[];
-  onChoose: (choice: IChoice) => void;
+  onChoose: (choice: IChoice, backupChoice: IChoice | null) => void;
 }
 
 const ChooserAnimationFlicker = ({ choices, onChoose }: IProps) => {
@@ -18,7 +18,7 @@ const ChooserAnimationFlicker = ({ choices, onChoose }: IProps) => {
 
   const nextFlick = useCallback(() => {
     if (nextFlickMs > 800) {
-      onChoose(choice);
+      onChoose(choice, null);
       setHasSelected(true);
     } else {
       setNextFlickMs(nextFlickMs * 1.3);

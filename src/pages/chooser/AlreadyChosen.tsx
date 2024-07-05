@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 type IProps = {
   choice: IChoice;
-  backupChoice?: IChoice;
+  backupChoice: IChoice | null;
 }
 
 export const AlreadyChosen = ({ choice, backupChoice }: IProps) => {

@@ -8,7 +8,7 @@ import randomChoice from "../randomChoice.ts";
 
 type IProps = {
   choices: IChoice[];
-  onChoose: (choice: IChoice) => void;
+  onChoose: (choice: IChoice, backupChoice: IChoice | null) => void;
 }
 
 const ChooserAnimationFlicker = ({ choices, onChoose }: IProps) => {
@@ -18,7 +18,7 @@ const ChooserAnimationFlicker = ({ choices, onChoose }: IProps) => {
   useEffect(() => {
     setTimeout(() => {
       setHasSelected(true);
-      onChoose(choice);
+      onChoose(choice, null);
     }, 3000); // Intentionally a bit shorter than the CSS animation because the last bit of that oesn't do much.
   }, []);
 

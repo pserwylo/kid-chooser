@@ -6,7 +6,7 @@ export type IChooserAnimationType = 'flicker' | 'fade';
 
 type IProps = {
   choices: IChoice[];
-  onChoose: (choice: IChoice) => void;
+  onChoose: (choice: IChoice, backupChoice: IChoice | null) => void;
 
   /**
    * If not present, choose one at random.

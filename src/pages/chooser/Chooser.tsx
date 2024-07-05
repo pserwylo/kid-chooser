@@ -23,18 +23,19 @@ const Chooser = () => {
     return;
   }
 
-  const handleChoose = (choice: IChoice) => {
+  const handleChoose = (choice: IChoice, backupChoice: IChoice) => {
     dispatch(
       recordChoice({
         chooserSlug,
         choiceSlug: choice.slug,
+        backupChoiceSlug: backupChoice?.slug,
       })
     );
   };
 
   return choice == null
     ? <ChooserAnimation choices={chooser.choices} onChoose={handleChoose} />
-    : <AlreadyChosen choice={choice} />;
+    : <AlreadyChosen choice={choice} backupChoice={backupChoice} />;
 
 }
 
