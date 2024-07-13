@@ -1,8 +1,10 @@
 import ChooserAnimationFlicker from "./ChooserAnimationFlicker.tsx";
 import {IChoice} from "../../../app/choicesSlice.tsx";
 import ChooserAnimationFade from "./ChooserAnimationFade.tsx";
+import ChooserAnimationPhysics from "./ChooserAnimationPhysics.tsx";
+import randomAnimationType from "./random-animation-type.ts";
 
-export type IChooserAnimationType = 'flicker' | 'fade';
+export type IChooserAnimationType = 'flicker' | 'fade' | 'physics';
 
 type IProps = {
   choices: IChoice[];
@@ -14,20 +16,16 @@ type IProps = {
   type?: IChooserAnimationType;
 };
 
-const allAnimationTypes: IChooserAnimationType[] = [ 'flicker', 'fade' ];
-
-export const randomAnimationType = (): IChooserAnimationType => {
-  const index = Math.floor(Math.random() * allAnimationTypes.length);
-  return allAnimationTypes[index];
-}
-
 const ChooserAnimation = ({ type, onChoose, choices }: IProps) => {
+
 
   if (type === undefined) {
     type = randomAnimationType();
   }
 
-  if (type === 'flicker') {
+  if (type === 'physics') {
+    return <ChooserAnimationPhysics choices={choices} onChoose={onChoose} />;
+  } else if (type === 'flicker') {
     return <ChooserAnimationFlicker choices={choices} onChoose={onChoose}/>;
   } else if (type === 'fade') {
     return <ChooserAnimationFade choices={choices} onChoose={onChoose}/>;

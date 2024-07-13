@@ -20,6 +20,7 @@ const ChooserAnimationFlicker = ({ choices, onChoose }: IProps) => {
       setHasSelected(true);
       onChoose(choice, null);
     }, 3000); // Intentionally a bit shorter than the CSS animation because the last bit of that oesn't do much.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

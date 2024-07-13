@@ -23,7 +23,7 @@ const Chooser = () => {
     return;
   }
 
-  const handleChoose = (choice: IChoice, backupChoice: IChoice) => {
+  const handleChoose = (choice: IChoice, backupChoice: IChoice | null) => {
     dispatch(
       recordChoice({
         chooserSlug,

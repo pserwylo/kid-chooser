@@ -1,0 +1,8 @@
+.chooser-animation-physics {
+    width: 100%;
+    height: 100vh;
+}
+
+.chooser-animation-physics--ball {
+    display: inline-block;
+}

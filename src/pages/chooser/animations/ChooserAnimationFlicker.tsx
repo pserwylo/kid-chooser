@@ -28,6 +28,7 @@ const ChooserAnimationFlicker = ({ choices, onChoose }: IProps) => {
 
   useEffect(() => {
     nextFlick();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

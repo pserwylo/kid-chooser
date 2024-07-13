@@ -11,7 +11,9 @@ export const AlreadyChosen = ({ choice, backupChoice }: IProps) => {
   return (
     <div className="chooser-choice">
       <div className="chooser-choice-selected">
-        {choice.label}! {choice.emoji}
+        {choice.label}!
+        <br />
+        {choice.emoji}
       </div>
       {backupChoice && <div className="chooser-choice-backup">
         Just kidding... {backupChoice.label}! {backupChoice.emoji}

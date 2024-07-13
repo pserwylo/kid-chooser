@@ -49,19 +49,19 @@ const choicesSlice = createSlice({
             {
               slug: "cereal",
               label: "Cereal",
-              emoji: "🥣",
+              emoji: "🥣🌾",
               probability: 1,
             },
             {
               slug: "fruit",
               label: "Fruit",
-              emoji: "🍏🍒🍐🍌🍓🍊🥝🍉",
+              emoji: "🍏🍌",
               probability: 1,
             },
             {
               slug: "yoghurt",
               label: "Yoghurt",
-              emoji: "🥣",
+              emoji: "🥄⚪",
               probability: 1,
             },
           ]
