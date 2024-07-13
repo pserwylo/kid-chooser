@@ -44,7 +44,7 @@ const createWorld = (choices: IChoice[], width: number, height: number, initialB
   const RAMP_WIDTH = (FUNNEL_WIDTH - (BALL_WIDTH * 1.2)) / 2
   const RAMP_HEIGHT = Math.min(RAMP_WIDTH / 4, BALL_WIDTH * 0.8);
   const FUNNEL_THICKNESS = 6;
-  const FUNNEL_START_Y = height - BALL_WIDTH * 3
+  const FUNNEL_START_Y = height - BALL_WIDTH * 4
   const funnels: Body[] = [];
   const buckets: Body[] = [];
 
@@ -101,7 +101,7 @@ const createWorld = (choices: IChoice[], width: number, height: number, initialB
   const NUM_Y = height / (PIN_WIDTH + BALL_WIDTH) - 4;
   const widthSpace = width / (NUM_X + 1);
   const heightSpace = height / (NUM_Y + 1);
-  for (let y = 2; y < NUM_Y - 2; y ++) {
+  for (let y = 2; y < NUM_Y - 3; y ++) {
     const xOffset = y % 2 == 0 ? widthSpace : widthSpace / 2;
     const xForRow = y % 2 == 0 ? NUM_X : NUM_X + 1;
     for (let x = 0; x < xForRow; x ++) {
