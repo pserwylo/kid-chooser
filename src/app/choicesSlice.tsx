@@ -59,6 +59,12 @@ const choicesSlice = createSlice({
               probability: 1,
             },
             {
+              slug: "toast",
+              label: "Toast",
+              emoji: "🍞",
+              probability: 1,
+            },
+            {
               slug: "yoghurt",
               label: "Yoghurt",
               emoji: "🥄⚪",
