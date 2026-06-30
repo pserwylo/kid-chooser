@@ -33,7 +33,11 @@ export const loadChooser = createAsyncThunk(
     const db = await getDB();
     const chooser = await db.get("choosers", slug);
 
-    dispatch(choicesSlice.actions.initChooser(chooser));
+    if (chooser != null) {
+      dispatch(choicesSlice.actions.initChooser(chooser));
+    } else {
+      console.error(`Could not find chooser: ${slug}`);
+    }
   },
 );
 
