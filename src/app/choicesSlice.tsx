@@ -1,4 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ChooserDTO, getDB} from "./db.ts";
 
 export type IChooser = {
   slug: string;
@@ -15,66 +16,30 @@ export type IChoice = {
   isJoke?: boolean;
 }
 
+export const loadChoosers = createAsyncThunk<void>(
+    "choices/loadChoosers",
+    async (_: void, { dispatch }) => {
+      const db = await getDB();
+      try {
+        const choosers = await db.getAll("choosers");
+
+        dispatch(choicesSlice.actions.initChoosers(choosers));
+      } catch (e) {
+        console.error(e);
+      }
+    },
+);
+
 const choicesSlice = createSlice({
   name: 'choices',
   initialState: {
     chosenChoices: [] as { chooserSlug: string, choiceSlug: string, backupChoiceSlug?: string }[],
-    choosers: [
-      {
-        slug: 'bathing',
-        label: 'Bathing',
-        description: '',
-        choices:
-          [
-            {
-              slug: "shower",
-              label: "Shower",
-              emoji: "🚿",
-              probability: 1,
-            },
-            {
-              slug: "bath",
-              label: "Bath",
-              emoji: "🛁",
-              probability: 1,
-            },
-          ]
-      },
-      {
-        slug: 'breakfast',
-        label: 'Breakfast',
-        description: '',
-        choices:
-          [
-            {
-              slug: "cereal",
-              label: "Cereal",
-              emoji: "🥣🌾",
-              probability: 1,
-            },
-            {
-              slug: "fruit",
-              label: "Fruit",
-              emoji: "🍏🍌",
-              probability: 1,
-            },
-            {
-              slug: "toast",
-              label: "Toast",
-              emoji: "🍞",
-              probability: 1,
-            },
-            {
-              slug: "yoghurt",
-              label: "Yoghurt",
-              emoji: "🥄⚪",
-              probability: 1,
-            },
-          ]
-      }
-    ] as IChooser[],
+    choosers: [] as ChooserDTO[],
   },
   reducers: {
+    initChoosers: (state, action: PayloadAction<ChooserDTO[]>) => {
+      state.choosers = action.payload;
+    },
     recordChoice: (state, action: PayloadAction<{ chooserSlug: string, choiceSlug: string, backupChoiceSlug?: string }>) => {
       const { chooserSlug, choiceSlug, backupChoiceSlug } = action.payload;
       const chooser = choicesSlice.getSelectors().selectChooserBySlug(state, chooserSlug);

@@ -1,12 +1,18 @@
 import {Button, Card, CardBody, CardFooter, Col, Container, Row} from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
-import {IChooser, selectChoosers, selectChosenChoicesForSlug} from "../app/choicesSlice.tsx";
-import {useAppSelector} from "../app/hooks.ts";
+import {IChooser, loadChoosers, selectChoosers, selectChosenChoicesForSlug} from "../app/choicesSlice.tsx";
+import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
 import './splash.css'
+import {useEffect} from "react";
 
 const Splash = () => {
 
+  const dispatch = useAppDispatch();
   const choosers = useAppSelector(selectChoosers);
+
+  useEffect(() => {
+    dispatch(loadChoosers());
+  }, [dispatch]);
 
   return (<Container>
     <Row className="splash-cards">
