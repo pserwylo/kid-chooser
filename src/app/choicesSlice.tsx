@@ -20,14 +20,21 @@ export const loadChoosers = createAsyncThunk<void>(
     "choices/loadChoosers",
     async (_: void, { dispatch }) => {
       const db = await getDB();
-      try {
-        const choosers = await db.getAll("choosers");
+      const choosers = await db.getAll("choosers");
 
-        dispatch(choicesSlice.actions.initChoosers(choosers));
-      } catch (e) {
-        console.error(e);
-      }
+      dispatch(choicesSlice.actions.initChoosers(choosers));
     },
+);
+
+export const loadChooser = createAsyncThunk(
+  "choices/loadChooser",
+  async (args: { slug: string }, { dispatch }) => {
+    const { slug } = args;
+    const db = await getDB();
+    const chooser = await db.get("choosers", slug);
+
+    dispatch(choicesSlice.actions.initChooser(chooser));
+  },
 );
 
 const choicesSlice = createSlice({
@@ -35,10 +42,14 @@ const choicesSlice = createSlice({
   initialState: {
     chosenChoices: [] as { chooserSlug: string, choiceSlug: string, backupChoiceSlug?: string }[],
     choosers: [] as ChooserDTO[],
+    chooser: null as ChooserDTO | null
   },
   reducers: {
     initChoosers: (state, action: PayloadAction<ChooserDTO[]>) => {
       state.choosers = action.payload;
+    },
+    initChooser: (state, action: PayloadAction<ChooserDTO>) => {
+      state.chooser = action.payload;
     },
     recordChoice: (state, action: PayloadAction<{ chooserSlug: string, choiceSlug: string, backupChoiceSlug?: string }>) => {
       const { chooserSlug, choiceSlug, backupChoiceSlug } = action.payload;
@@ -68,6 +79,7 @@ const choicesSlice = createSlice({
   },
   selectors: {
     selectChoosers: (sliceState) => sliceState.choosers,
+    selectChooser: (sliceState) => sliceState.chooser,
     selectChooserBySlug: (sliceState, slug) => sliceState.choosers.find(c => c.slug === slug),
     selectChosenChoicesForSlug: (sliceState, chooserSlug) => {
       const chooser = choicesSlice.getSelectors().selectChooserBySlug(sliceState, chooserSlug);
@@ -90,6 +102,7 @@ const nullChoice = {
 };
 
 export const {
+  selectChooser,
   selectChoosers,
   selectChooserBySlug,
   selectChosenChoicesForSlug,

@@ -1,27 +1,34 @@
 import "./animations/chooser-animation-fade.css";
 import {
-  IChoice,
-  recordChoice, selectChooserBySlug,
+  IChoice, loadChooser,
+  recordChoice, selectChooser, selectChooserBySlug,
   selectChosenChoicesForSlug
 } from "../../app/choicesSlice.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import ChooserAnimation from "./animations/ChooserAnimation.tsx";
 import {AlreadyChosen} from "./AlreadyChosen.tsx";
+import {useEffect} from "react";
 
 const Chooser = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {chooserSlug} = useParams<{ chooserSlug: string }>();
-  const chooser = useAppSelector(state => selectChooserBySlug(state, chooserSlug));
+  const chooser = useAppSelector(selectChooser);
   const { choice, backupChoice } = useAppSelector(state => selectChosenChoicesForSlug(state, chooserSlug));
 
-  if (!chooser || !chooserSlug) {
-    console.error('Trying to render chooser, but slug doesn\'t exist: ', {chooser, chooserSlug})
+  if (!chooserSlug) {
+    console.error('Trying to render chooser, but slug doesn\'t exist: ', {chooserSlug})
     navigate("/");
     return;
   }
+
+  useEffect(() => {
+    if (chooserSlug) {
+      dispatch(loadChooser({ slug: chooserSlug }));
+    }
+  }, [dispatch, chooserSlug]);
 
   const handleChoose = (choice: IChoice, backupChoice: IChoice | null) => {
     dispatch(
@@ -32,6 +39,10 @@ const Chooser = () => {
       })
     );
   };
+
+  if (chooser == null) {
+    return null;
+  }
 
   return choice == null
     ? <ChooserAnimation choices={chooser.choices} onChoose={handleChoose} />
